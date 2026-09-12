@@ -1,0 +1,41 @@
+name: Data Quality Validation
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+      - "spike/**"
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  frictionless-validation:
+    name: Validar calidad de datos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install frictionless pandas numpy
+
+      - name: Ejecutar limpieza
+        run: |
+          python src/clean_data.py
+
+      - name: Validar datos con Frictionless
+        run: |
+          frictionless validate data/package.json

@@ -1,0 +1,4 @@
+¿Existe una relación significativa entre las variables numéricas del dataset que permita orientar el análisis posterior?
+
+H1: Existen relaciones lineales relevantes entre algunas variables numéricas.
+H0: No existen relaciones lineales relevantes entre las variables numéricas.
